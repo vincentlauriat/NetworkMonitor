@@ -39,6 +39,14 @@
 - [x] Vérification indépendante : `spctl -a -t exec -vv` accepted/Notarized Developer ID, `codesign --verify --deep --strict` OK, `stapler validate` OK
 - [x] [Release GitHub v3.0.0](https://github.com/vincentlauriat/NetworkMonitor/releases/tag/v3.0.0) publiée avec le DMG
 
+## Fait (Phase 6 — "l'UX n'est pas encore au niveau", comparaison code des 3 apps de référence)
+- [x] Recherche dédiée (agent Explore) sur MacInside/ClaudeCodeUsage/RTKInfos : specs concrètes de header, cartes, hiérarchie de liste — aucune des 3 n'a de zone morte en haut de fenêtre, ni de hiérarchie parent/enfant à copier littéralement
+- [x] **Header** : toolbar natif en `sizeMode="small"`, item wordmark réduit de 80-90pt à 36-40pt de hauteur (`MainMenu.xib`) — supprime le grand vide sombre entre les feux tricolores et le titre
+- [x] **Cartes stats** : remplacement de `NSVisualEffectMaterialContentBackground` (invisible sur fond clair) par un `NSView` avec fond teinté (`labelColor` 4.5%) + bordure hairline 10% + rayon 12pt (`TableViewController.m`)
+- [x] **Hiérarchie process/connexion** : la police des lignes de connexion (17pt) était plus grande que celle des lignes process (15pt) — inversé (process 15pt SemiBold, connexion 13pt Regular) ; ajout d'un fond teinté vert 7% sur les lignes process (`CustomRow.isProcessRow`) pour les distinguer visuellement des connexions enfants
+- [x] **Nouvelle icône d'app** : l'ancien panneau de signalisation vert d'Objective-See remplacé par un glyphe réseau (nœud central + 3 connexions, vert `#34D399` sur fond dégradé sombre navy/vert), généré via un script Swift/CoreGraphics (`make_icon.swift`, non conservé dans le repo — un-shot), toutes les tailles régénérées avec `sips`
+- [x] Build + relance + capture d'écran de vérification à chaque étape
+
 ## En attente d'arbitrage
 - Refonte du header/toolbar (inspiration `HeaderView` de ClaudeCodeUsage) — jugée moins prioritaire, pas encore traitée.
 

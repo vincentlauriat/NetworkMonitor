@@ -49,3 +49,9 @@ Voir `TODOS.md` (sections "Fait (Phase 3)" et "Fait (Phase 4)") pour le détail 
 - **Version** : bump `MARKETING_VERSION` `2.3.0` → `3.0.0` (majeur, pas mineur) car la cible de déploiement macOS 26+ casse la compatibilité avec les versions antérieures, en plus du rebrand complet.
 - **Script de release** : `Scripts/release.sh`, adapté de `Templates/Scripts/release-simple.sh` — pas de `project.yml`/XcodeGen dans ce repo (le `.xcodeproj` est versionné directement), pas de framework imbriqué à signer (pas de Sparkle).
 - **Release publiée** : [v3.0.0](https://github.com/vincentlauriat/NetworkMonitor/releases/tag/v3.0.0), DMG signé (Developer ID Application) + notarisé + stapled, vérifié indépendamment (`spctl -a -t exec -vv` → `accepted, source=Notarized Developer ID`, `codesign --verify --deep --strict` OK, `stapler validate` OK).
+
+## Phase 6 — "l'UX n'est pas encore au niveau" (post-3.0.0)
+
+- Retour utilisateur répété deux fois sur les phases précédentes sans plus de précision ("pas au rdv" puis "pas au niveau") — plutôt que de retenter des ajustements à l'aveugle, comparaison au niveau code de MacInside/ClaudeCodeUsage/RTKInfos (header/toolbar, composant carte, hiérarchie de liste) via un agent dédié, puis proposition de 3 correctifs concrets validés par l'utilisateur avant implémentation (voir `TODOS.md` Phase 6 pour le détail technique).
+- Constat clé de la recherche : aucune des 3 apps de référence n'implémente de vraie hiérarchie parent/enfant (toutes des listes plates) — le traitement process/connexion de NetworkMonitor est donc une invention propre à l'app, pas une copie.
+- Nouvelle icône d'app générée par script (Swift/CoreGraphics, un-shot, non versionné) pour remplacer le panneau de signalisation vert hérité d'Objective-See.
