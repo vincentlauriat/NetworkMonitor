@@ -8,7 +8,13 @@ Via its simple intuitive UI, you can quickly:
 
 This is a rebranded fork of [Netiquette](https://objective-see.com/products/netiquette.html) by [Objective-See](https://objective-see.com), distributed under the same GPLv3 license.
 
-<p align="center"><img src="https://objective-see.com/images/NQ/netiquette.png"></p>
+<p align="center"><img src="docs/images/screenshot.png" width="800"></p>
+
+**Documentation:** \
+Full feature list, Liquid Glass notes, and CLI reference: [docs/index.html](docs/index.html).
+
+**Requirements:** \
+macOS 26 (Tahoe) or later — the UI was rebuilt around AppKit's Liquid Glass materials (`NSGlassEffectView`, `NSBezelStyleGlass`), which don't exist on earlier releases.
 
 **To Build:** 
 

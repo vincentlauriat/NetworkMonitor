@@ -13,8 +13,10 @@
 - [x] Imagesets `niqText`, `Logo`, `LogoBG` supprimés du projet (plus référencés)
 - [x] Build + run + screenshot de vérification après rebrand
 
+- [x] Page de documentation NetworkMonitor (`docs/index.html`, structure inspirée de la page Netiquette d'Objective-See, contenu/branding propres, capture d'écran réelle embarquée) + lien depuis `README.md`
+
 ## En attente d'arbitrage
-- [ ] Page de documentation NetworkMonitor (structure inspirée de la page Netiquette d'Objective-See, contenu/branding propres) — pas commencée.
+- Aucun point ouvert pour l'instant.
 
 ## Hors périmètre (voir PLAN.md)
 - Pas de `NSGlassEffectContainerView` pour fusionner les boutons flottants (pas de bénéfice visible ici).
