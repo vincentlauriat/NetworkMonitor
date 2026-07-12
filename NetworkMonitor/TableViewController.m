@@ -52,18 +52,17 @@
         //alloc
         self.collapsedItems = [NSMutableDictionary dictionary];
         
-        //pre-req for color of overlay
-        self.overlay.wantsLayer = YES;
-        
-        //round overlay's corners
-        self.overlay.layer.cornerRadius = 20.0;
-        
-        //mask overlay
-        self.overlay.layer.masksToBounds = YES;
-        
-        //set overlay's view color to gray
-        self.overlay.layer.backgroundColor = NSColor.lightGrayColor.CGColor;
-        
+        //back overlay with a real glass panel
+        // ...inserted behind the spinner/text, filling the overlay's bounds
+        NSGlassEffectView* overlayGlass = [[NSGlassEffectView alloc] initWithFrame:self.overlay.bounds];
+        overlayGlass.autoresizingMask = NSViewWidthSizable|NSViewHeightSizable;
+        overlayGlass.cornerRadius = 20.0;
+        overlayGlass.style = NSGlassEffectViewStyleRegular;
+        [self.overlay addSubview:overlayGlass positioned:NSWindowBelow relativeTo:nil];
+
+        //liquid glass-ify the floating action buttons
+        [self applyGlassStyleToFloatingButtons];
+
         //set (default) scanning msg
         self.activityMessage.stringValue = NSLocalizedString(@"Enumerating Network Connections...", @"Enumerating Network Connections...");
         
@@ -93,9 +92,61 @@
         
         //default zoom
         self.zoomScale = 100.00f;
-        
+
     });
-    
+
+    return;
+}
+
+//swap the floating action buttons' hand-drawn light/dark bitmaps + faux-transparency
+// for real Liquid Glass bezels with SF Symbols, which self-adapt to appearance/tint
+-(void)applyGlassStyleToFloatingButtons
+{
+    //button tag -> SF Symbol name
+    NSDictionary<NSNumber*, NSString*>* symbols = @{
+        @(BUTTON_SAVE):     @"square.and.arrow.down",
+        @(BUTTON_PREFS):    @"gearshape",
+        @(BUTTON_LOGO):     @"globe",
+        @(BUTTON_EXPAND):   @"rectangle.expand.vertical",
+        @(BUTTON_COLLAPSE): @"rectangle.compress.vertical",
+    };
+
+    //walk direct subviews of the window's content view
+    // ...the 5 floating buttons live there (not exposed as outlets)
+    for(NSView* subview in self.window.contentView.subviews)
+    {
+        //symbol name for this button's tag (nil if not one of ours)
+        NSString* symbolName = nil;
+
+        //only care about buttons
+        if(YES != [subview isKindOfClass:NSButton.class])
+        {
+            continue;
+        }
+
+        //skip if tag isn't one of the floating action buttons
+        symbolName = symbols[@(((NSButton*)subview).tag)];
+        if(nil == symbolName)
+        {
+            continue;
+        }
+
+        //button
+        NSButton* button = (NSButton*)subview;
+
+        //glass bezel
+        button.bezelStyle = NSBezelStyleGlass;
+        button.bordered = YES;
+
+        //SF Symbol replaces the hand-drawn light/dark bitmap pair
+        button.image = [NSImage imageWithSystemSymbolName:symbolName accessibilityDescription:button.toolTip];
+        button.alternateImage = nil;
+        button.imagePosition = NSImageOnly;
+
+        //glass material provides its own translucency/pressed state
+        button.alphaValue = 1.0;
+    }
+
     return;
 }
 
