@@ -1,4 +1,6 @@
 # NetworkMonitor
+[![Release](https://img.shields.io/github/v/release/vincentlauriat/NetworkMonitor)](https://github.com/vincentlauriat/NetworkMonitor/releases/latest)
+
 NetworkMonitor is a lightweight open-source network monitor designed exclusively for macOS.
 
 Via its simple intuitive UI, you can quickly:
@@ -16,11 +18,14 @@ Full feature list, Liquid Glass notes, and CLI reference: [docs/index.html](docs
 **Requirements:** \
 macOS 26 (Tahoe) or later — the UI was rebuilt around AppKit's Liquid Glass materials (`NSGlassEffectView`, `NSBezelStyleGlass`), which don't exist on earlier releases.
 
+**To Download:** \
+Signed and notarized builds are published on the [Releases page](https://github.com/vincentlauriat/NetworkMonitor/releases/latest) as a `.dmg`.
+
 **To Build:** 
 
 1. build in Xcode
 
-NetworkMonitor should build cleanly in Xcode (though you will have to remove code signing constraints, or replace with your own Apple developer code signing certificate).
+NetworkMonitor should build cleanly in Xcode (though you will have to remove code signing constraints, or replace with your own Apple developer code signing certificate). To produce a signed, notarized release DMG yourself: `./Scripts/release.sh <version>` (requires your own Developer ID Application certificate and notarytool credentials).
 
 **To Run:** \
 Simply run application: `NetworkMonitor.app`

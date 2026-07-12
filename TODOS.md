@@ -31,6 +31,14 @@
 - [x] Les 5 boutons flottants (Save/Preferences/Logo/Expand/Collapse) sont passés du bezel `NSBezelStyleGlass` à un style **borderless** (icône SF Symbol seule, `contentTintColor = secondaryLabelColor`, image en template) — le SDK 26 n'expose qu'un seul style de glass bezel (pas de variante plus légère), et ces boutons reposent sur le fond plat de la fenêtre (pas sur le contenu défilant), donc le style plat (inspiration RTKInfos) reste lisible sans plaque de fond
 - [x] Build + run + capture d'écran de vérification
 
+## Fait (Phase 5 — release 3.0.0)
+- [x] `rename/network-monitor` fusionné dans `master` via PR #1, puis `Scripts/release.sh` via PR #2 (jamais de push direct sur `master`)
+- [x] `MARKETING_VERSION` bump `2.3.0` → `3.0.0` (majeur : rupture macOS 26+ + rebrand complet)
+- [x] `Scripts/release.sh` ajouté (adapté de `Templates/Scripts/release-simple.sh`, pas de XcodeGen/Sparkle ici)
+- [x] Build Release signé (Developer ID Application), notarisé (profil `AppliMacVincentGithub`), stapled → `release/NetworkMonitor-3.0.0.dmg`
+- [x] Vérification indépendante : `spctl -a -t exec -vv` accepted/Notarized Developer ID, `codesign --verify --deep --strict` OK, `stapler validate` OK
+- [x] [Release GitHub v3.0.0](https://github.com/vincentlauriat/NetworkMonitor/releases/tag/v3.0.0) publiée avec le DMG
+
 ## En attente d'arbitrage
 - Refonte du header/toolbar (inspiration `HeaderView` de ClaudeCodeUsage) — jugée moins prioritaire, pas encore traitée.
 

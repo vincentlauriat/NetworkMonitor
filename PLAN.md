@@ -38,3 +38,14 @@
 - **Badge d'état coloré** dans la colonne "State" : point coloré + texte (vert=Established, bleu=Listen, jaune=Syn*, gris=Closed, orange=autres états de fermeture) — inspiré du pattern `LegendRow` de MacInside. Les lignes UDP (sans `tcpState`) restent sans badge, comme avant.
 - Construction en frames manuels + `autoresizingMask` (pas d'Auto Layout/`NSStackView`) pour rester cohérent avec le reste du fichier, qui est entièrement en layout par frame. La bande se reflow via une notification `NSViewFrameDidChangeNotification` sur son propre frame (redimensionnement fenêtre).
 - Hors scope pour l'instant : refonte du header/toolbar (jugée moins prioritaire que la bande de stats et les badges).
+
+## Phase 3 — typographie Geist + allègement des boutons
+
+Voir `TODOS.md` (sections "Fait (Phase 3)" et "Fait (Phase 4)") pour le détail : remplacement de Menlo par Geist/Geist Mono (inspiration RTKInfos) et passage des 5 boutons flottants de `NSBezelStyleGlass` à un style borderless (SF Symbol + `contentTintColor`).
+
+## Phase 4 — release 3.0.0
+
+- **Merge** : `rename/network-monitor` (rebrand + Liquid Glass + dashboard + typographie) fusionné dans `master` via PR #1 (https://github.com/vincentlauriat/NetworkMonitor/pull/1), suivi d'une PR #2 pour `Scripts/release.sh` (https://github.com/vincentlauriat/NetworkMonitor/pull/2) — jamais de push direct sur `master`.
+- **Version** : bump `MARKETING_VERSION` `2.3.0` → `3.0.0` (majeur, pas mineur) car la cible de déploiement macOS 26+ casse la compatibilité avec les versions antérieures, en plus du rebrand complet.
+- **Script de release** : `Scripts/release.sh`, adapté de `Templates/Scripts/release-simple.sh` — pas de `project.yml`/XcodeGen dans ce repo (le `.xcodeproj` est versionné directement), pas de framework imbriqué à signer (pas de Sparkle).
+- **Release publiée** : [v3.0.0](https://github.com/vincentlauriat/NetworkMonitor/releases/tag/v3.0.0), DMG signé (Developer ID Application) + notarisé + stapled, vérifié indépendamment (`spctl -a -t exec -vv` → `accepted, source=Notarized Developer ID`, `codesign --verify --deep --strict` OK, `stapler validate` OK).
