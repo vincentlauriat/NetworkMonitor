@@ -179,7 +179,7 @@
                                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="100" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fST-Bo-s5k">
                                                             <rect key="frame" x="46" y="28" width="86" height="18"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Item Name" id="Iql-Sc-jIR">
-                                                                <font key="font" size="15" name="GeistMono-Medium"/>
+                                                                <font key="font" size="15" name="GeistMono-SemiBold"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -218,7 +218,7 @@
                                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5i-dn-VqS">
                                                             <rect key="frame" x="-1" y="17" width="854" height="20"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="connection " id="zLL-cd-Yu1">
-                                                                <font key="font" size="17" name="GeistMono-Medium"/>
+                                                                <font key="font" size="13" name="GeistMono-Regular"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -448,18 +448,18 @@
                     <constraint firstAttribute="bottom" secondItem="j8n-6d-Z9E" secondAttribute="bottom" constant="16" id="ylg-28-pS8"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="F7992151-3D44-4008-8120-1E7144AD010D" centeredItem="N2t-ck-2if" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="moN-pe-sbF">
+            <toolbar key="toolbar" implicitIdentifier="F7992151-3D44-4008-8120-1E7144AD010D" centeredItem="N2t-ck-2if" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="small" id="moN-pe-sbF">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rET-wR-4wz"/>
                     <toolbarItem implicitItemIdentifier="1087FB6D-CBC1-4AA2-BCA0-0C1214A6E6DB" label="" paletteLabel="NetworkMonitor" image="niqLogo" autovalidates="NO" id="N2t-ck-2if">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="200" height="80"/>
-                        <size key="maxSize" width="500" height="90"/>
+                        <size key="minSize" width="200" height="36"/>
+                        <size key="maxSize" width="500" height="40"/>
                         <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" key="view" id="NKr-NR-qdh">
-                            <rect key="frame" x="0.0" y="30" width="500" height="34"/>
+                            <rect key="frame" x="0.0" y="3" width="500" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" selectable="NO" editable="NO" sendsActionOnEndEditing="NO" alignment="center" title="NetworkMonitor" id="olR-U6-raE">
-                                <font key="font" size="26" name="Geist-Bold"/>
+                                <font key="font" size="17" name="Geist-Bold"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>

@@ -243,7 +243,7 @@
 -(NSView*)statCardWithCaption:(NSString*)caption accentColor:(NSColor*)accent valueLabel:(NSTextField**)outValueLabel
 {
     //card background
-    NSVisualEffectView* card = nil;
+    NSView* card = nil;
 
     //caption label
     NSTextField* captionLabel = nil;
@@ -259,14 +259,16 @@
     NSFontDescriptor* roundedDescriptor = nil;
 
     //card
-    card = [[NSVisualEffectView alloc] initWithFrame:NSZeroRect];
-    card.material = NSVisualEffectMaterialContentBackground;
-    card.blendingMode = NSVisualEffectBlendingModeWithinWindow;
-    card.state = NSVisualEffectStateActive;
+    // a plain layer-backed view rather than NSVisualEffectMaterialContentBackground:
+    // that material blends into the identically-colored outline view right below it,
+    // leaving the card with no visible surface at all. A tinted fill (labelColor at
+    // low alpha, so it auto-inverts light/dark) gives it real contrast instead.
+    card = [[NSView alloc] initWithFrame:NSZeroRect];
     card.wantsLayer = YES;
-    card.layer.cornerRadius = 10.0;
+    card.layer.backgroundColor = [[NSColor.labelColor colorWithAlphaComponent:0.045] CGColor];
+    card.layer.cornerRadius = 12.0;
     card.layer.borderWidth = 1.0;
-    card.layer.borderColor = [[NSColor.labelColor colorWithAlphaComponent:0.08] CGColor];
+    card.layer.borderColor = [[NSColor.labelColor colorWithAlphaComponent:0.10] CGColor];
 
     //caption (Geist Medium; falls back to the system font if unregistered)
     captionText = [[NSMutableAttributedString alloc] initWithString:caption.uppercaseString];
@@ -729,7 +731,11 @@ bail:
         //set row ID
         rowView.identifier = kRowIdentifier;
     }
-    
+
+    //process (parent) rows get a tinted background; connection (child)
+    // rows keep the outline view's default alternating background
+    rowView.isProcessRow = [item isKindOfClass:[OrderedDictionary class]];
+
     return rowView;
 }
 
