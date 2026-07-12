@@ -27,11 +27,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="600" height="365"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tx4-yW-fcJ">
+                    <textField focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tx4-yW-fcJ">
                         <rect key="frame" x="138" y="2" width="325" height="65"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="niqText" id="m7R-HO-YMp"/>
-                    </imageView>
+                        <textFieldCell key="cell" lineBreakMode="clipping" selectable="NO" editable="NO" sendsActionOnEndEditing="NO" alignment="center" title="NetworkMonitor" id="m7R-HO-YMp">
+                            <font key="font" size="30" name="Menlo-Bold"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <toolbar key="toolbar" implicitIdentifier="C2AC49E3-FD8B-4919-9001-868355500E38" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="V8g-Ya-LK4">
@@ -247,6 +251,5 @@
     <resources>
         <image name="PrefsUpdate" width="72" height="72"/>
         <image name="niqLogo" width="512" height="512"/>
-        <image name="niqText" width="955" height="182"/>
     </resources>
 </document>

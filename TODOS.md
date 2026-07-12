@@ -7,9 +7,14 @@
 - [x] `CustomRow` → sélection en couleurs système dynamiques (`selectedContentBackgroundColor`) au lieu du branchement manuel `isDarkMode()`
 - [x] Build + run + screenshot réel de vérification
 
+## Fait (suite)
+- [x] Wordmark "NetIQuette" (asset `niqText`) remplacé par un vrai `NSTextField` "NetworkMonitor" (Menlo-Bold) dans MainMenu/AboutWindow/Preferences/UpdateWindow — plus de dépendance à une image bitmap pour le nom du produit
+- [x] Bouton "Logo" (ouvre `PRODUCT_URL`) : logo Objective-See ("apple-eye") retiré du xib, remplacé par le pictogramme signpost (`niqLogo`, même asset que l'AppIcon) en fallback statique + SF Symbol "globe" à l'exécution
+- [x] Imagesets `niqText`, `Logo`, `LogoBG` supprimés du projet (plus référencés)
+- [x] Build + run + screenshot de vérification après rebrand
+
 ## En attente d'arbitrage
-- [ ] Assets bitmap `niqText`/`niqLogo` (Assets.xcassets) : toujours le logo texte "NetIQuette" en dur dans une image PNG — visible dans le toolbar et les fenêtres About/Update/Preferences. Sans lien direct avec Liquid Glass, mais incohérent avec le rebrand NetworkMonitor. À refaire (texte réel ou nouvel asset) si voulu.
-- [ ] Page de documentation NetworkMonitor (structure inspirée de la page Netiquette d'Objective-See, contenu/branding propres) — pas commencée, en attente de screenshots définitifs de l'UI.
+- [ ] Page de documentation NetworkMonitor (structure inspirée de la page Netiquette d'Objective-See, contenu/branding propres) — pas commencée.
 
 ## Hors périmètre (voir PLAN.md)
 - Pas de `NSGlassEffectContainerView` pour fusionner les boutons flottants (pas de bénéfice visible ici).

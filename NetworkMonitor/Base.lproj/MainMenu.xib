@@ -111,7 +111,7 @@
                 <subviews>
                     <button tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="Z3X-kC-co8" userLabel="Logo">
                         <rect key="frame" x="812" y="8" width="32" height="32"/>
-                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="Logo" imagePosition="only" alignment="center" alternateImage="LogoBG" imageScaling="proportionallyUpOrDown" inset="2" id="Kyd-Kw-k0y">
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="niqLogo" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Kyd-Kw-k0y">
                             <behavior key="behavior" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -451,15 +451,19 @@
             <toolbar key="toolbar" implicitIdentifier="F7992151-3D44-4008-8120-1E7144AD010D" centeredItem="N2t-ck-2if" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="moN-pe-sbF">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rET-wR-4wz"/>
-                    <toolbarItem implicitItemIdentifier="1087FB6D-CBC1-4AA2-BCA0-0C1214A6E6DB" label="" paletteLabel="" image="niqText" autovalidates="NO" id="N2t-ck-2if">
+                    <toolbarItem implicitItemIdentifier="1087FB6D-CBC1-4AA2-BCA0-0C1214A6E6DB" label="" paletteLabel="NetworkMonitor" image="niqLogo" autovalidates="NO" id="N2t-ck-2if">
                         <nil key="toolTip"/>
                         <size key="minSize" width="200" height="80"/>
                         <size key="maxSize" width="500" height="90"/>
-                        <imageView key="view" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="NKr-NR-qdh">
-                            <rect key="frame" x="0.0" y="14" width="500" height="90"/>
+                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" key="view" id="NKr-NR-qdh">
+                            <rect key="frame" x="0.0" y="30" width="500" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="niqText" id="olR-U6-raE"/>
-                        </imageView>
+                            <textFieldCell key="cell" lineBreakMode="clipping" selectable="NO" editable="NO" sendsActionOnEndEditing="NO" alignment="center" title="NetworkMonitor" id="olR-U6-raE">
+                                <font key="font" size="26" name="Menlo-Bold"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textFieldCell>
+                        </textField>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="CF826839-BC2B-4FEF-898A-77DC4D2486F1" label="" paletteLabel="" tag="1" id="gH4-ag-QAf">
                         <nil key="toolTip"/>
@@ -633,14 +637,12 @@
         <image name="FriendsMalwarebytes" width="2500" height="403"/>
         <image name="FriendsPANW" width="1312" height="240"/>
         <image name="FriendsiVerify" width="500" height="180"/>
-        <image name="Logo" width="194" height="236"/>
-        <image name="LogoBG" width="194" height="236"/>
         <image name="Love" width="256" height="256"/>
         <image name="NSColorPanel" width="32" height="32"/>
         <image name="Preferences" width="128" height="128"/>
         <image name="PreferencesAlternate" width="128" height="128"/>
         <image name="Save" width="128" height="128"/>
         <image name="SaveAlternate" width="128" height="128"/>
-        <image name="niqText" width="955" height="182"/>
+        <image name="niqLogo" width="512" height="512"/>
     </resources>
 </document>
