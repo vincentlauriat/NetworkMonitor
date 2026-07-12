@@ -1,6 +1,8 @@
 .DS_Store
 Carthage/*
 DerivedData/*
+build/
+release/
 *.xcscheme
 *.xcuserstate
 NetworkMonitor.xcodeproj/xcuserdata/*
