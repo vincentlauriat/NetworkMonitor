@@ -1,25 +1,23 @@
-# Netiquette
-Netiquette, is lightweight open-source network monitor designed exclusively for macOS. 
+# NetworkMonitor
+NetworkMonitor is a lightweight open-source network monitor designed exclusively for macOS.
 
 Via its simple intuitive UI, you can quickly:
 * view all network connections
 * uncover any listening sockets
 * filter and export network information
 
-<p align="center"><img src="https://objective-see.com/images/NQ/netiquette.png"></p>
+This is a rebranded fork of [Netiquette](https://objective-see.com/products/netiquette.html) by [Objective-See](https://objective-see.com), distributed under the same GPLv3 license.
 
-**Documentation:** \
-Full details and usage instructions can be found [here](https://objective-see.com/products/netiquette.html). 
+<p align="center"><img src="https://objective-see.com/images/NQ/netiquette.png"></p>
 
 **To Build:** 
 
-1. run in project directory, run: `carthage update  --platform macOS`
-2. build in Xcode
+1. build in Xcode
 
-Netiquette should build cleanly in Xcode (though you will have to remove code signing constraints, or replace with your own Apple developer code signing certificate).
+NetworkMonitor should build cleanly in Xcode (though you will have to remove code signing constraints, or replace with your own Apple developer code signing certificate).
 
 **To Run:** \
-Simply run application: `Netiquette.app`
+Simply run application: `NetworkMonitor.app`
 
 **To Support:** \
 &#x2764;&nbsp; Love this product or want to support it? Please check out my [patreon page](https://www.patreon.com/objective_see) :)
