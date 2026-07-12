@@ -11,6 +11,9 @@
 
 /* FUNCTIONS */
 
+//register bundled fonts (Geist/Geist Mono) before any nib loads
+void registerCustomFonts(void);
+
 //print usage
 void usage(void);
 

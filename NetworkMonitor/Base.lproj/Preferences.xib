@@ -31,7 +31,7 @@
                         <rect key="frame" x="138" y="2" width="325" height="65"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" selectable="NO" editable="NO" sendsActionOnEndEditing="NO" alignment="center" title="NetworkMonitor" id="m7R-HO-YMp">
-                            <font key="font" size="30" name="Menlo-Bold"/>
+                            <font key="font" size="30" name="Geist-Bold"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textFieldCell>
@@ -83,7 +83,7 @@
                     <rect key="frame" x="72" y="222" width="510" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Auto Refresh" id="JVI-Or-h0u">
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -92,7 +92,7 @@
                     <rect key="frame" x="72" y="189" width="510" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Automatically reenumerate and redisplay network connections." id="E0T-Ug-P8f">
-                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <font key="font" size="12" name="Geist-Regular"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -112,7 +112,7 @@
                     <rect key="frame" x="72" y="162" width="510" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Resolve Names" id="4EN-j2-enV">
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -132,7 +132,7 @@
                     <rect key="frame" x="72" y="102" width="510" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hide Apple Processes" id="a5n-tt-65v">
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -141,7 +141,7 @@
                     <rect key="frame" x="72" y="69" width="510" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Do not display network activity from to system binaries." id="SYJ-Qv-cRq">
-                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <font key="font" size="12" name="Geist-Regular"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -161,7 +161,7 @@
                     <rect key="frame" x="72" y="42" width="510" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hide Local Connections" id="NVd-tb-ysH">
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -170,7 +170,7 @@
                     <rect key="frame" x="72" y="9" width="510" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Do not display network activity to local host (lo*)." id="WTz-7B-Wrc">
-                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <font key="font" size="12" name="Geist-Regular"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -179,7 +179,7 @@
                     <rect key="frame" x="72" y="129" width="510" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Resolve (domain) names via reverse lookup." id="SG5-YM-BoV">
-                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <font key="font" size="12" name="Geist-Regular"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -206,7 +206,7 @@
                     <rect key="frame" x="72" y="222" width="528" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Disable Update Checks" id="z5b-fA-WCk">
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -215,7 +215,7 @@
                     <rect key="frame" x="72" y="189" width="528" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Do not automatically check for new versions." id="JV5-cY-ff4">
-                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <font key="font" size="12" name="Geist-Regular"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -225,7 +225,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Check Now" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2qr-2x-A3U">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                     </buttonCell>
                     <connections>
                         <action selector="check4Update:" target="-2" id="GJb-mB-UIz"/>
@@ -239,7 +239,7 @@
                     <rect key="frame" x="18" y="60" width="582" height="74"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="5gt-xh-Ti5">
-                        <font key="font" size="13" name="Menlo-Bold"/>
+                        <font key="font" size="13" name="Geist-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

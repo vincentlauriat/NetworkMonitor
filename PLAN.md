@@ -25,3 +25,16 @@
 ## Hors périmètre (assumé, à confirmer si besoin)
 - Pas de fusion des boutons dans un `NSGlassEffectContainerView` (optimisation de perf/rendu quand plusieurs vues glass sont proches) — chaque bouton en `NSBezelStyleGlass` individuel est déjà une adoption légitime, le container ajoute de la complexité de re-parenting dans le xib sans bénéfice visible ici.
 - Pas de retouche des fenêtres secondaires (About/Prefs/Update) au-delà du bump de cible — leur chrome standard hérite du glass automatiquement.
+
+## Phase 2 — UX dashboard (retour "pas au rendez-vous", inspiration MacInside / ClaudeCodeUsage)
+
+### Bug critique trouvé en cours de route
+`TableViewController` hérite de `NSOutlineView` mais n'est **jamais inséré dans la hiérarchie de vues** (c'est un `customObject` pur dans le xib, seulement utilisé comme delegate/datasource — le vrai outline visible est `self.outlineView`, un outlet séparé). Conséquence : `self.window` (hérité de `NSView`) était **toujours `nil`**, donc `applyGlassStyleToFloatingButtons` ne faisait **rien** depuis le début — les 5 boutons flottants n'ont jamais reçu le style glass, malgré la vérification (visuelle, mais insuffisante) de la Phase 1. Vérifié empiriquement via un `NSLog` temporaire + `log show` : `self.window = (null)` / `self.outlineView.window` non-nil. C'est très probablement la vraie cause du "l'UX n'est pas au rendez-vous".
+- **Fix** : toutes les résolutions de fenêtre dans `TableViewController.m` passent maintenant par `self.outlineView.window` (ou `self.scrollView.superview` quand seul le conteneur est nécessaire), jamais par `self.window`.
+- Revérifié par capture d'écran ciblée sur le `CGWindowID` réel de l'app (`screencapture -l<id>`, robuste à l'occlusion par d'autres fenêtres — contrairement à `-R<geometry>` qui capture une zone d'écran et peut inclure une fenêtre superposée d'une autre session).
+
+### Inspiration retenue (MacInside, ClaudeCodeUsage — SwiftUI, traduite en AppKit pur/frames manuels)
+- **Bande de stats "at a glance"** au-dessus du tableau : 5 cartes (`Connections`, `Established`, `Listening`, `Bytes Up`, `Bytes Down`), matériau translucide (`NSVisualEffectView` + bordure hairline 8% + coins 10pt), légende en petites majuscules + gros chiffre arrondi en dessous — inspiré de `StatCardView` (ClaudeCodeUsage) / `MetricCard` (MacInside). Recalculée à chaque `-update:` à partir de `self.processedItems` (donc reflète le filtre actif).
+- **Badge d'état coloré** dans la colonne "State" : point coloré + texte (vert=Established, bleu=Listen, jaune=Syn*, gris=Closed, orange=autres états de fermeture) — inspiré du pattern `LegendRow` de MacInside. Les lignes UDP (sans `tcpState`) restent sans badge, comme avant.
+- Construction en frames manuels + `autoresizingMask` (pas d'Auto Layout/`NSStackView`) pour rester cohérent avec le reste du fichier, qui est entièrement en layout par frame. La bande se reflow via une notification `NSViewFrameDidChangeNotification` sur son propre frame (redimensionnement fenêtre).
+- Hors scope pour l'instant : refonte du header/toolbar (jugée moins prioritaire que la bande de stats et les badges).

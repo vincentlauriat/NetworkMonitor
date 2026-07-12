@@ -33,7 +33,7 @@
                         <rect key="frame" x="132" y="89" width="147" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" selectable="NO" editable="NO" sendsActionOnEndEditing="NO" alignment="center" title="NetworkMonitor" id="Ws8-bD-j2R">
-                            <font key="font" size="17" name="Menlo-Bold"/>
+                            <font key="font" size="17" name="Geist-Bold"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textFieldCell>
@@ -42,7 +42,7 @@
                         <rect key="frame" x="131" y="62" width="279" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="bBK-v0-ypq">
-                            <font key="font" size="12" name="Menlo-Regular"/>
+                            <font key="font" size="12" name="Geist-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -52,7 +52,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nMV-1f-RyK">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" size="13" name="Menlo-Regular"/>
+                            <font key="font" size="13" name="Geist-Regular"/>
                         </buttonCell>
                         <connections>
                             <action selector="buttonHandler:" target="-2" id="tap-If-b45"/>

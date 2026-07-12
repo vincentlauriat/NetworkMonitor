@@ -14,6 +14,7 @@
 #import "procInfo/procInfo.h"
 
 #import <Cocoa/Cocoa.h>
+#import <CoreText/CoreText.h>
 
 //main
 // process cmdline args, show UI, etc
@@ -78,12 +79,55 @@ int main(int argc, const char * argv[])
     //set defaults
     [NSUserDefaults.standardUserDefaults registerDefaults:@{PREFS_AUTO_REFRESH:@YES, PREFS_RESOLVE_NAMES:@YES, PREFS_HIDE_APPLE:@YES, PREFS_HIDE_LOCAL:@YES}];
 
+    //register bundled fonts
+    // must happen before NSApplicationMain, which loads MainMenu.xib
+    // (and the font names it references) as part of app startup
+    registerCustomFonts();
+
     //launch app normally
     status = NSApplicationMain(argc, argv);
     
 bail:
     
     return status;
+}
+
+//register bundled fonts (Geist/Geist Mono) with the process font manager
+// so xibs can reference them ("Geist-Bold", "GeistMono-Medium", etc.)
+void registerCustomFonts(void)
+{
+    //font file names, from the "Fonts" bundle group
+    NSArray* fontFileNames = @[@"Geist", @"GeistMono"];
+
+    for(NSString* fontFileName in fontFileNames)
+    {
+        //url
+        NSURL* url = nil;
+
+        //error
+        CFErrorRef error = NULL;
+
+        //find in bundle
+        url = [NSBundle.mainBundle URLForResource:fontFileName withExtension:@"ttf"];
+        if(nil == url)
+        {
+            //not found
+            continue;
+        }
+
+        //register
+        // failure is non-fatal: xib text just falls back to the system font
+        if(YES != CTFontManagerRegisterFontsForURL((__bridge CFURLRef)url, kCTFontManagerScopeProcess, &error))
+        {
+            //release error
+            if(NULL != error)
+            {
+                CFRelease(error);
+            }
+        }
+    }
+
+    return;
 }
 
 //print usage

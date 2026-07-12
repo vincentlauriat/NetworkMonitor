@@ -179,7 +179,7 @@
                                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="100" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fST-Bo-s5k">
                                                             <rect key="frame" x="46" y="28" width="86" height="18"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Item Name" id="Iql-Sc-jIR">
-                                                                <font key="font" size="15" name="Menlo-Bold"/>
+                                                                <font key="font" size="15" name="GeistMono-Medium"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -190,7 +190,7 @@
                                                                 <constraint firstAttribute="height" constant="17" id="Eya-kT-0fE"/>
                                                             </constraints>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Item Path" usesSingleLineMode="YES" id="6tZ-RA-Kuj">
-                                                                <font key="font" size="11" name="Menlo-Regular"/>
+                                                                <font key="font" size="11" name="GeistMono-Regular"/>
                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -218,7 +218,7 @@
                                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5i-dn-VqS">
                                                             <rect key="frame" x="-1" y="17" width="854" height="20"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="connection " id="zLL-cd-Yu1">
-                                                                <font key="font" size="17" name="Menlo-Bold"/>
+                                                                <font key="font" size="17" name="GeistMono-Medium"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -322,7 +322,7 @@
                                 <rect key="frame" x="18" y="43" width="464" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Enumerating Network Connections..." id="T3k-y4-uvq">
-                                    <font key="font" size="13" name="Menlo-Bold"/>
+                                    <font key="font" size="13" name="Geist-Bold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -382,7 +382,7 @@
                             <constraint firstAttribute="width" constant="51" id="KYv-TB-FcA"/>
                         </constraints>
                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Collapse" id="uOE-h2-1m0">
-                            <font key="font" size="8" name="Menlo-Regular"/>
+                            <font key="font" size="8" name="Geist-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -394,7 +394,7 @@
                             <constraint firstAttribute="height" constant="12" id="ntE-Zy-ZLA"/>
                         </constraints>
                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Expand" id="G7W-QE-aFI">
-                            <font key="font" size="8" name="Menlo-Regular"/>
+                            <font key="font" size="8" name="Geist-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -406,7 +406,7 @@
                             <constraint firstAttribute="width" constant="36" id="Aro-hG-22j"/>
                         </constraints>
                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Save" id="c9y-8g-HZk">
-                            <font key="font" size="8" name="Menlo-Regular"/>
+                            <font key="font" size="8" name="Geist-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -418,7 +418,7 @@
                             <constraint firstAttribute="width" constant="79" id="oUU-Tb-OPJ"/>
                         </constraints>
                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Settings" id="bH4-Rh-fvB">
-                            <font key="font" size="8" name="Menlo-Regular"/>
+                            <font key="font" size="8" name="Geist-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -459,7 +459,7 @@
                             <rect key="frame" x="0.0" y="30" width="500" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" selectable="NO" editable="NO" sendsActionOnEndEditing="NO" alignment="center" title="NetworkMonitor" id="olR-U6-raE">
-                                <font key="font" size="26" name="Menlo-Bold"/>
+                                <font key="font" size="26" name="Geist-Bold"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textFieldCell>
@@ -473,7 +473,7 @@
                             <rect key="frame" x="0.0" y="14" width="185" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <searchFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" id="FZk-JV-dl5">
-                                <font key="font" size="13" name="Menlo-Bold"/>
+                                <font key="font" size="13" name="Geist-Bold"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </searchFieldCell>
@@ -515,7 +515,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="No" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Hi-iC-bLD">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="13" name="Menlo-Regular"/>
+                                                <font key="font" size="13" name="Geist-Regular"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="closeSupportWindow:" target="Voe-Tx-rLC" id="GUg-5n-BuU"/>
@@ -526,7 +526,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="push" title="Yes!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hne-jY-DmH">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="13" name="Menlo-Bold"/>
+                                                <font key="font" size="13" name="Geist-Bold"/>
                                                 <connections>
                                                     <action selector="supportUs:" target="Voe-Tx-rLC" id="YLZ-zo-D32"/>
                                                 </connections>

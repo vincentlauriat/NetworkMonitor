@@ -46,6 +46,16 @@ NS_ASSUME_NONNULL_BEGIN
 //filter string
 @property (nonatomic, retain)NSString* filterString;
 
+//"at a glance" summary strip, sitting above the outline view
+@property (nonatomic, retain)NSView* statsStrip;
+
+//stat cards shown in the strip (kept around for relayout on resize)
+@property (nonatomic, retain)NSArray<NSView*>* statCards;
+
+//value labels of the stat cards, in fixed order:
+// connections, established, listening, bytes up, bytes down
+@property (nonatomic, retain)NSArray<NSTextField*>* statValueLabels;
+
 /* METHODS */
 
 //update table

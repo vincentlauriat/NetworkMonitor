@@ -37,6 +37,9 @@
 @synthesize filterString;
 @synthesize collapsedItems;
 @synthesize processedItems;
+@synthesize statsStrip;
+@synthesize statCards;
+@synthesize statValueLabels;
 
 //perform some init's
 -(void)awakeFromNib
@@ -51,7 +54,7 @@
         
         //alloc
         self.collapsedItems = [NSMutableDictionary dictionary];
-        
+
         //back overlay with a real glass panel
         // ...inserted behind the spinner/text, filling the overlay's bounds
         NSGlassEffectView* overlayGlass = [[NSGlassEffectView alloc] initWithFrame:self.overlay.bounds];
@@ -62,6 +65,9 @@
 
         //liquid glass-ify the floating action buttons
         [self applyGlassStyleToFloatingButtons];
+
+        //insert the "at a glance" summary strip above the outline view
+        [self buildStatsStrip];
 
         //set (default) scanning msg
         self.activityMessage.stringValue = NSLocalizedString(@"Enumerating Network Connections...", @"Enumerating Network Connections...");
@@ -99,7 +105,11 @@
 }
 
 //swap the floating action buttons' hand-drawn light/dark bitmaps + faux-transparency
-// for real Liquid Glass bezels with SF Symbols, which self-adapt to appearance/tint
+// for plain, borderless SF Symbols (RTKInfos-style: no bezel, quiet tint) — an
+// earlier pass used NSBezelStyleGlass here, but the SDK offers only that one glass
+// bezel (no lighter variant) and the pill-shaped chrome read as heavy; these buttons
+// sit on the window's flat background below the outline view, not over scrolling
+// content, so a borderless icon reads fine without a backing panel
 -(void)applyGlassStyleToFloatingButtons
 {
     //button tag -> SF Symbol name
@@ -113,7 +123,10 @@
 
     //walk direct subviews of the window's content view
     // ...the 5 floating buttons live there (not exposed as outlets)
-    for(NSView* subview in self.window.contentView.subviews)
+    // NOTE: 'self' (TableViewController) is a top-level nib object that's never
+    // inserted into the view hierarchy despite subclassing NSOutlineView, so
+    // self.window is always nil here; self.outlineView IS embedded, so route through it
+    for(NSView* subview in self.outlineView.window.contentView.subviews)
     {
         //symbol name for this button's tag (nil if not one of ours)
         NSString* symbolName = nil;
@@ -134,20 +147,275 @@
         //button
         NSButton* button = (NSButton*)subview;
 
-        //glass bezel
-        button.bezelStyle = NSBezelStyleGlass;
-        button.bordered = YES;
+        //no bezel/pill — just the glyph
+        button.bordered = NO;
 
         //SF Symbol replaces the hand-drawn light/dark bitmap pair
+        // template rendering lets contentTintColor drive the color
         button.image = [NSImage imageWithSystemSymbolName:symbolName accessibilityDescription:button.toolTip];
+        button.image.template = YES;
         button.alternateImage = nil;
         button.imagePosition = NSImageOnly;
-
-        //glass material provides its own translucency/pressed state
+        button.contentTintColor = NSColor.secondaryLabelColor;
         button.alphaValue = 1.0;
     }
 
     return;
+}
+
+//build the "at a glance" summary strip (connections/established/listening/bytes)
+// and shrink the outline view's scroll view to make room for it
+-(void)buildStatsStrip
+{
+    //strip height + gap above the (shrunk) scroll view
+    CGFloat const stripHeight = 60.0;
+    CGFloat const gap = 10.0;
+
+    //card captions + accent colors, left to right
+    NSArray* cardDefs = nil;
+
+    //cards built so far
+    NSMutableArray* cards = nil;
+
+    //their value labels, same order
+    NSMutableArray* valueLabels = nil;
+
+    //scroll view's current frame
+    NSRect scrollFrame = {0};
+
+    //strip's frame
+    NSRect stripFrame = {0};
+
+    //container both live in
+    NSView* container = self.scrollView.superview;
+    if(nil == container)
+    {
+        return;
+    }
+
+    //shrink the scroll view, keep it glued to the (bottom) button row
+    scrollFrame = self.scrollView.frame;
+    scrollFrame.size.height -= (stripHeight + gap);
+    self.scrollView.frame = scrollFrame;
+
+    //strip sits directly above, pinned to the top as the window resizes
+    stripFrame = NSMakeRect(scrollFrame.origin.x, NSMaxY(scrollFrame) + gap, scrollFrame.size.width, stripHeight);
+    self.statsStrip = [[NSView alloc] initWithFrame:stripFrame];
+    self.statsStrip.autoresizingMask = NSViewWidthSizable|NSViewMinYMargin;
+    self.statsStrip.postsFrameChangedNotifications = YES;
+    [container addSubview:self.statsStrip];
+
+    //watch for width changes (window resize) to reflow the cards
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(layoutStatCards) name:NSViewFrameDidChangeNotification object:self.statsStrip];
+
+    //caption -> accent color (nil == neutral/labelColor)
+    cardDefs = @[
+        @[@"Connections", NSColor.labelColor],
+        @[@"Established",  NSColor.systemGreenColor],
+        @[@"Listening",    NSColor.systemBlueColor],
+        @[@"Bytes Up",     NSColor.labelColor],
+        @[@"Bytes Down",   NSColor.labelColor],
+    ];
+
+    cards = [NSMutableArray array];
+    valueLabels = [NSMutableArray array];
+
+    for(NSArray* def in cardDefs)
+    {
+        NSTextField* valueLabel = nil;
+        NSView* card = [self statCardWithCaption:def[0] accentColor:def[1] valueLabel:&valueLabel];
+        [self.statsStrip addSubview:card];
+        [cards addObject:card];
+        [valueLabels addObject:valueLabel];
+    }
+
+    self.statCards = cards;
+    self.statValueLabels = valueLabels;
+
+    //initial layout
+    [self layoutStatCards];
+
+    return;
+}
+
+//build a single stat card: a subtle bordered material panel with
+// an uppercase caption on top and a large bold number below
+-(NSView*)statCardWithCaption:(NSString*)caption accentColor:(NSColor*)accent valueLabel:(NSTextField**)outValueLabel
+{
+    //card background
+    NSVisualEffectView* card = nil;
+
+    //caption label
+    NSTextField* captionLabel = nil;
+
+    //attributed caption (uppercase, secondary, small/bold, slight letter-spacing)
+    NSMutableAttributedString* captionText = nil;
+
+    //value label
+    NSTextField* valueLabel = nil;
+
+    //bold system font, upgraded to the rounded design if available
+    NSFont* valueFont = nil;
+    NSFontDescriptor* roundedDescriptor = nil;
+
+    //card
+    card = [[NSVisualEffectView alloc] initWithFrame:NSZeroRect];
+    card.material = NSVisualEffectMaterialContentBackground;
+    card.blendingMode = NSVisualEffectBlendingModeWithinWindow;
+    card.state = NSVisualEffectStateActive;
+    card.wantsLayer = YES;
+    card.layer.cornerRadius = 10.0;
+    card.layer.borderWidth = 1.0;
+    card.layer.borderColor = [[NSColor.labelColor colorWithAlphaComponent:0.08] CGColor];
+
+    //caption (Geist Medium; falls back to the system font if unregistered)
+    captionText = [[NSMutableAttributedString alloc] initWithString:caption.uppercaseString];
+    [captionText addAttributes:@{
+        NSFontAttributeName: [NSFont fontWithName:@"Geist-Medium" size:10.5] ?: [NSFont systemFontOfSize:10.5 weight:NSFontWeightSemibold],
+        NSForegroundColorAttributeName: NSColor.secondaryLabelColor,
+        NSKernAttributeName: @(0.6),
+    } range:NSMakeRange(0, captionText.length)];
+
+    captionLabel = [NSTextField labelWithAttributedString:captionText];
+    captionLabel.frame = NSMakeRect(14, 32, 200, 14);
+    captionLabel.autoresizingMask = NSViewWidthSizable;
+    [card addSubview:captionLabel];
+
+    //value (large, Geist SemiBold; falls back to the rounded system font)
+    valueFont = [NSFont fontWithName:@"Geist-SemiBold" size:22];
+    if(nil == valueFont)
+    {
+        valueFont = [NSFont boldSystemFontOfSize:22];
+        roundedDescriptor = [valueFont.fontDescriptor fontDescriptorWithDesign:NSFontDescriptorSystemDesignRounded];
+        if(nil != roundedDescriptor)
+        {
+            valueFont = [NSFont fontWithDescriptor:roundedDescriptor size:22] ?: valueFont;
+        }
+    }
+
+    valueLabel = [NSTextField labelWithString:@"–"];
+    valueLabel.frame = NSMakeRect(14, 8, 200, 26);
+    valueLabel.autoresizingMask = NSViewWidthSizable;
+    valueLabel.font = valueFont;
+    valueLabel.textColor = accent ?: NSColor.labelColor;
+    valueLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    [card addSubview:valueLabel];
+
+    if(NULL != outValueLabel)
+    {
+        *outValueLabel = valueLabel;
+    }
+
+    return card;
+}
+
+//reflow the stat cards to evenly fill the strip's current width
+// called on initial build and whenever the strip (window) is resized
+-(void)layoutStatCards
+{
+    //spacing between cards
+    CGFloat const spacing = 10.0;
+
+    //how many
+    NSUInteger count = self.statCards.count;
+
+    //width per card
+    CGFloat cardWidth = 0;
+
+    //walking x position
+    CGFloat x = 0;
+
+    if(0 == count)
+    {
+        return;
+    }
+
+    cardWidth = (self.statsStrip.bounds.size.width - (spacing * (count - 1))) / count;
+
+    for(NSView* card in self.statCards)
+    {
+        card.frame = NSMakeRect(x, 0, cardWidth, self.statsStrip.bounds.size.height);
+        x += (cardWidth + spacing);
+    }
+
+    return;
+}
+
+//recompute the "at a glance" numbers from whatever's currently
+// visible (post-filter) in the outline view
+-(void)refreshStatsStrip
+{
+    //totals
+    NSUInteger totalConnections = 0;
+    NSUInteger established = 0;
+    NSUInteger listening = 0;
+    unsigned long long totalUp = 0;
+    unsigned long long totalDown = 0;
+
+    if(5 != self.statValueLabels.count)
+    {
+        return;
+    }
+
+    for(OrderedDictionary* events in self.processedItems.allValues)
+    {
+        for(Event* event in events.allValues)
+        {
+            totalConnections++;
+            totalUp += event.bytesUp;
+            totalDown += event.bytesDown;
+
+            if(YES == [event.tcpState isEqualToString:@"Established"])
+            {
+                established++;
+            }
+            else if(YES == [event.tcpState isEqualToString:@"Listen"])
+            {
+                listening++;
+            }
+        }
+    }
+
+    self.statValueLabels[0].stringValue = [NSString stringWithFormat:@"%lu", (unsigned long)totalConnections];
+    self.statValueLabels[1].stringValue = [NSString stringWithFormat:@"%lu", (unsigned long)established];
+    self.statValueLabels[2].stringValue = [NSString stringWithFormat:@"%lu", (unsigned long)listening];
+    self.statValueLabels[3].stringValue = (0 == totalUp) ? @"0" : [NSByteCountFormatter stringFromByteCount:totalUp countStyle:NSByteCountFormatterCountStyleFile];
+    self.statValueLabels[4].stringValue = (0 == totalDown) ? @"0" : [NSByteCountFormatter stringFromByteCount:totalDown countStyle:NSByteCountFormatterCountStyleFile];
+
+    return;
+}
+
+//semantic color for a TCP state, so state reads at a glance (a colored
+// dot in the state column) instead of requiring the user to parse plain text
+-(NSColor*)colorForTCPState:(NSString*)state
+{
+    //established: active data flow
+    if(YES == [state isEqualToString:@"Established"])
+    {
+        return NSColor.systemGreenColor;
+    }
+
+    //listening: waiting for a connection
+    if(YES == [state isEqualToString:@"Listen"])
+    {
+        return NSColor.systemBlueColor;
+    }
+
+    //handshake in progress
+    if( (YES == [state isEqualToString:@"SynSent"]) ||
+        (YES == [state isEqualToString:@"SynReceived"]) )
+    {
+        return NSColor.systemYellowColor;
+    }
+
+    //fully torn down
+    if(YES == [state isEqualToString:@"Closed"])
+    {
+        return NSColor.systemGrayColor;
+    }
+
+    //everything else: teardown in progress (CloseWait/Closing/LastAck/FinWaitN/TimeWait/...)
+    return NSColor.systemOrangeColor;
 }
 
 //update outline view
@@ -187,7 +455,10 @@
     
     //filter
     self.processedItems = [self filter];
-        
+
+    //recompute the summary strip's numbers for the (now filtered) items
+    [self refreshStatsStrip];
+
     //first time
     // remove/update
     dispatch_once(&once, ^{
@@ -556,8 +827,15 @@ bail:
                 //set state
                 if(nil != ((Event*)item).tcpState)
                 {
-                    //state
-                    ((NSTableCellView*)cell).textField.stringValue = ((Event*)item).tcpState;
+                    //colored dot + label, so state reads at a glance
+                    NSString* state = ((Event*)item).tcpState;
+                    NSFont* font = ((NSTableCellView*)cell).textField.font;
+                    NSMutableAttributedString* badge = [[NSMutableAttributedString alloc] initWithString:@"●  "];
+                    [badge addAttributes:@{NSForegroundColorAttributeName: [self colorForTCPState:state], NSFontAttributeName: font}
+                                    range:NSMakeRange(0, badge.length)];
+                    [badge appendAttributedString:[[NSAttributedString alloc] initWithString:state
+                                                                                    attributes:@{NSForegroundColorAttributeName: NSColor.labelColor, NSFontAttributeName: font}]];
+                    ((NSTableCellView*)cell).textField.attributedStringValue = badge;
                 }
             }
             
